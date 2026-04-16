@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Signup | AI Sales Prediction{% endblock %}
+
+{% block content %}
+<section class="row justify-content-center">
+    <div class="col-lg-6 col-md-9">
+        <div class="panel auth-card p-4 p-lg-5">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold mb-2">Create Your Account</h3>
+                <p class="text-soft mb-0">Start using AI-driven sales forecasting today.</p>
+            </div>
+            <form method="post" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control form-control-lg" name="username" placeholder="Your username" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control form-control-lg" name="email" placeholder="name@company.com" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control form-control-lg" name="password" placeholder="At least 6 characters" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control form-control-lg" name="confirm_password" placeholder="Repeat password" required>
+                </div>
+                <div class="col-12 d-grid mt-2">
+                    <button class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-user-plus me-2"></i>Signup
+                    </button>
+                </div>
+                <div class="col-12 text-center">
+                    <span class="text-soft">Already registered?</span>
+                    <a href="{{ url_for('login') }}" class="auth-link ms-1">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

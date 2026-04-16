@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Home | AI Sales Prediction{% endblock %}
+
+{% block content %}
+<section class="hero-card p-4 p-lg-5 mb-4 mb-lg-5">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <span class="badge rounded-pill hero-badge mb-3">
+                <i class="fa-solid fa-sparkles me-2"></i>Intelligent Revenue Forecasting
+            </span>
+            <h1 class="display-5 fw-bold mb-3">AI Sales Prediction System</h1>
+            <p class="text-soft fs-5 mb-4">
+                End-to-end analytics engine with machine learning predictions, real-time KPI tracking,
+                and interactive SaaS dashboard insights for modern e-commerce teams.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg px-4">
+                    <i class="fa-solid fa-gauge-high me-2"></i>Open Dashboard
+                </a>
+                <a href="{{ url_for('predict_page') }}" class="btn btn-outline-primary btn-lg px-4">
+                    <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Try Prediction
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="glass-card p-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h6 class="mb-0 fw-semibold">Sales Trend Preview</h6>
+                    <span class="small text-soft">Last 30 points</span>
+                </div>
+                <canvas id="homeTrendChart" height="220"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4">
+    <div class="col-lg-8">
+        <div class="panel h-100 p-4">
+            <h5 class="fw-semibold mb-3">Model Comparison</h5>
+            <p class="text-soft mb-4">Performance of trained models on holdout validation data.</p>
+            <div class="table-responsive">
+                <table class="table table-borderless align-middle mb-0">
+                    <thead>
+                        <tr class="text-soft">
+                            <th>Model</th>
+                            <th>R2 Score</th>
+                            <th>MAE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for metric in metrics %}
+                        <tr>
+                            <td class="fw-semibold">{{ metric.name }}</td>
+                            <td>{{ "%.4f"|format(metric.r2) }}</td>
+                            <td>${{ "%.2f"|format(metric.mae) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel h-100 p-4">
+            <h5 class="fw-semibold mb-3">Highlights</h5>
+            <ul class="list-unstyled mb-0 feature-list">
+                <li><i class="fa-solid fa-database"></i>SQLite-backed analytics on 100K+ rows</li>
+                <li><i class="fa-solid fa-filter-circle-dollar"></i>Dynamic filtering by category and demographics</li>
+                <li><i class="fa-solid fa-brain"></i>Multi-model ML training with best-model selection</li>
+                <li><i class="fa-solid fa-chart-pie"></i>Interactive Chart.js visualizations and KPI cards</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script id="home-preview-data" type="application/json">{{ preview|safe }}</script>
+{% endblock %}

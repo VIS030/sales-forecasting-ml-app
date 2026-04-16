@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}About | AI Sales Prediction{% endblock %}
+
+{% block content %}
+<section class="mb-4">
+    <h2 class="fw-bold mb-1">About This Project</h2>
+    <p class="text-soft mb-0">
+        A complete sales intelligence platform that connects data cleaning, EDA, machine learning,
+        and Flask web delivery into one practical business workflow.
+    </p>
+</section>
+
+<section class="row g-4">
+    <div class="col-lg-6">
+        <div class="panel p-4 h-100">
+            <h5 class="fw-semibold mb-3">Project Overview</h5>
+            <p class="text-soft mb-3">
+                This system is designed like a mini analytics product used by startups and e-commerce teams.
+                It transforms raw transactional records into actionable insights and prediction outputs.
+            </p>
+            <ul class="list-unstyled mb-0 feature-list">
+                <li><i class="fa-solid fa-gears"></i>Data cleaning + feature preparation pipeline</li>
+                <li><i class="fa-solid fa-database"></i>SQLite storage for fast KPI querying</li>
+                <li><i class="fa-solid fa-chart-simple"></i>Dashboard visual analytics with filters</li>
+                <li><i class="fa-solid fa-wand-magic-sparkles"></i>ML-powered sales estimation API</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel p-4 h-100">
+            <h5 class="fw-semibold mb-3">Problem Statement</h5>
+            <p class="text-soft mb-3">
+                E-commerce teams need accurate demand forecasting and fast insights to optimize promotions,
+                inventory, and product strategy. This solution provides visual analytics and model-based
+                sales predictions to reduce guesswork.
+            </p>
+            <p class="text-soft mb-0">
+                Example: Before launching a campaign, managers can test price, quantity, and discount combinations
+                on the prediction page to estimate expected revenue impact.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel p-4 h-100">
+            <h5 class="fw-semibold mb-3">Dataset Description</h5>
+            <p class="text-soft mb-3">
+                The system uses a large transaction dataset containing user demographics, product details,
+                purchase behavior, discounts, and review scores. Data is cleaned and stored in SQLite to
+                power dashboard KPIs and EDA.
+            </p>
+            <p class="text-soft mb-0">
+                Core fields include <strong>Price</strong>, <strong>Quantity</strong>, <strong>DiscountRate</strong>,
+                <strong>Category</strong>, <strong>Country</strong>, and target variable <strong>TotalAmount</strong>.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel p-4 h-100">
+            <h5 class="fw-semibold mb-3">Machine Learning Models</h5>
+            <ul class="list-unstyled mb-3 feature-list">
+                <li><i class="fa-solid fa-square-poll-vertical"></i>Linear Regression (baseline)</li>
+                <li><i class="fa-solid fa-tree"></i>Random Forest Regressor</li>
+                <li><i class="fa-solid fa-bolt"></i>XGBoost Regressor</li>
+            </ul>
+            <p class="text-soft mb-0">
+                Models are compared using R2 and MAE, and the best-performing model is automatically saved
+                and loaded for live predictions.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel p-4 h-100">
+            <h5 class="fw-semibold mb-3">EDA (Exploratory Data Analysis)</h5>
+            <p class="text-soft mb-3">
+                The EDA section helps users understand historical patterns before acting on predictions.
+            </p>
+            <ul class="list-unstyled mb-0 feature-list">
+                <li><i class="fa-solid fa-chart-line"></i>Sales trend chart reveals seasonality and growth shifts</li>
+                <li><i class="fa-solid fa-chart-pie"></i>Category and gender pie charts show customer mix</li>
+                <li><i class="fa-solid fa-chart-column"></i>Age distribution highlights dominant buyer segments</li>
+                <li><i class="fa-solid fa-circle-nodes"></i>Discount vs sales scatter shows promotion behavior</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel p-4 h-100">
+            <h5 class="fw-semibold mb-3">Flask Backend Architecture</h5>
+            <p class="text-soft mb-3">
+                Flask acts as the orchestration layer between database analytics, machine learning inference,
+                and frontend templates.
+            </p>
+            <ul class="list-unstyled mb-0 feature-list">
+                <li><i class="fa-solid fa-route"></i>Routes serve Home, Dashboard, Predict, EDA, and About pages</li>
+                <li><i class="fa-solid fa-shield-halved"></i>Session auth protects private analytics routes</li>
+                <li><i class="fa-solid fa-plug-circle-check"></i>`/api/predict` handles JSON input and returns predictions</li>
+                <li><i class="fa-solid fa-server"></i>SQLite queries power KPI cards and chart data dynamically</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

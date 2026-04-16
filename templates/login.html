@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Login | AI Sales Prediction{% endblock %}
+
+{% block content %}
+<section class="row justify-content-center">
+    <div class="col-lg-5 col-md-8">
+        <div class="panel auth-card p-4 p-lg-5">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold mb-2">Welcome Back</h3>
+                <p class="text-soft mb-0">Sign in to access your analytics workspace.</p>
+            </div>
+            <form method="post" class="row g-3">
+                <div class="col-12">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control form-control-lg" name="email" placeholder="name@company.com" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control form-control-lg" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="col-12 d-grid mt-2">
+                    <button class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>Login
+                    </button>
+                </div>
+                <div class="col-12 text-center">
+                    <span class="text-soft">No account?</span>
+                    <a href="{{ url_for('signup') }}" class="auth-link ms-1">Create one</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

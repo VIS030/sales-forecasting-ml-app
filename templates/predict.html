@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Predict | AI Sales Prediction{% endblock %}
+
+{% block content %}
+<section class="mb-4">
+    <h2 class="fw-bold mb-1">Revenue Prediction Engine</h2>
+    <p class="text-soft mb-0">Enter sales parameters to estimate expected order value using the best-performing model.</p>
+</section>
+
+<section class="row g-4">
+    <div class="col-xl-6">
+        <div class="panel p-4 h-100">
+            <h5 class="fw-semibold mb-4">Prediction Input</h5>
+            <form id="predictForm" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Category</label>
+                    <select class="form-select form-select-lg" name="category" required>
+                        {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Country</label>
+                    <select class="form-select form-select-lg" name="country" required>
+                        {% for country in countries %}
+                        <option value="{{ country }}">{{ country }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Price</label>
+                    <input type="number" step="0.01" min="0" class="form-control form-control-lg" name="price" placeholder="e.g. 499.99" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Quantity</label>
+                    <input type="number" step="1" min="1" class="form-control form-control-lg" name="quantity" placeholder="e.g. 2" required>
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label">Discount Rate</label>
+                    <input type="number" step="0.01" min="0" max="1" class="form-control form-control-lg" name="discount_rate" placeholder="0.00 - 1.00" required>
+                </div>
+                <div class="col-12 d-grid">
+                    <button id="predictButton" type="submit" class="btn btn-primary btn-lg">
+                        <span class="btn-text"><i class="fa-solid fa-rocket me-2"></i>Predict Sales</span>
+                        <span class="spinner-border spinner-border-sm d-none" id="predictSpinner"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="panel p-4 h-100 result-panel">
+            <h5 class="fw-semibold mb-4">Prediction Result</h5>
+            <div id="predictionOutput" class="text-center py-5">
+                <div class="prediction-placeholder">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <p class="text-soft mt-3 mb-0">Your predicted sales value appears here.</p>
+                </div>
+            </div>
+            <div class="mini-chart-wrap mt-4">
+                <canvas id="predictionMiniChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="panel p-4 mt-4">
+    <h6 class="fw-semibold mb-3">Active Best Model</h6>
+    <div class="d-flex flex-wrap gap-3">
+        <span class="metric-pill"><i class="fa-solid fa-robot me-2"></i>{{ model_metrics.name }}</span>
+        <span class="metric-pill"><i class="fa-solid fa-chart-line me-2"></i>R2: {{ "%.4f"|format(model_metrics.r2) }}</span>
+        <span class="metric-pill"><i class="fa-solid fa-bullseye me-2"></i>MAE: ${{ "%.2f"|format(model_metrics.mae) }}</span>
+    </div>
+</section>
+{% endblock %}

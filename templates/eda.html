@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}EDA | AI Sales Prediction{% endblock %}
+
+{% block content %}
+<section class="mb-4">
+    <h2 class="fw-bold mb-1">Exploratory Data Analysis</h2>
+    <p class="text-soft mb-0">Data storytelling from your e-commerce transactions to guide smarter strategy.</p>
+</section>
+
+<section class="row g-4">
+    <div class="col-xl-8">
+        <div class="panel p-4 h-100">
+            <h6 class="fw-semibold mb-3">Sales Over Time</h6>
+            <img class="img-fluid rounded-4 mb-3" src="{{ url_for('static', filename='eda/sales_trend.png') }}" alt="Sales trend">
+            <p class="mb-0 text-soft">{{ insights.sales_trend }}</p>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="panel p-4 h-100">
+            <h6 class="fw-semibold mb-3">Category Distribution</h6>
+            <img class="img-fluid rounded-4 mb-3" src="{{ url_for('static', filename='eda/category_distribution.png') }}" alt="Category distribution">
+            <p class="mb-0 text-soft">{{ insights.category_distribution }}</p>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="panel p-4 h-100">
+            <h6 class="fw-semibold mb-3">Age Distribution</h6>
+            <img class="img-fluid rounded-4 mb-3" src="{{ url_for('static', filename='eda/age_distribution.png') }}" alt="Age distribution">
+            <p class="mb-0 text-soft">{{ insights.age_distribution }}</p>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="panel p-4 h-100">
+            <h6 class="fw-semibold mb-3">Gender Distribution</h6>
+            <img class="img-fluid rounded-4 mb-3" src="{{ url_for('static', filename='eda/gender_distribution.png') }}" alt="Gender distribution">
+            <p class="mb-0 text-soft">{{ insights.gender_distribution }}</p>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="panel p-4 h-100">
+            <h6 class="fw-semibold mb-3">Discount vs Sales</h6>
+            <img class="img-fluid rounded-4 mb-3" src="{{ url_for('static', filename='eda/discount_vs_sales.png') }}" alt="Discount vs Sales">
+            <p class="mb-0 text-soft">{{ insights.discount_vs_sales }}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

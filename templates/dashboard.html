@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | AI Sales Prediction{% endblock %}
+
+{% block content %}
+<section class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Sales Analytics Dashboard</h2>
+        <p class="text-soft mb-0">Explore revenue intelligence with real-time data filters and charted trends.</p>
+    </div>
+</section>
+
+<section class="panel p-3 p-lg-4 mb-4">
+    <form class="row g-3 align-items-end" method="get" action="{{ url_for('dashboard') }}">
+        <div class="col-md-2">
+            <label class="form-label">Start Date</label>
+            <input type="date" name="start_date" class="form-control form-control-lg" value="{{ filters.start_date }}" min="{{ date_bounds.min }}" max="{{ date_bounds.max }}">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">End Date</label>
+            <input type="date" name="end_date" class="form-control form-control-lg" value="{{ filters.end_date }}" min="{{ date_bounds.min }}" max="{{ date_bounds.max }}">
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Category</label>
+            <select class="form-select form-select-lg" name="category">
+                <option value="">All</option>
+                {% for item in options.categories %}
+                <option value="{{ item }}" {% if filters.category == item %}selected{% endif %}>{{ item }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Country</label>
+            <select class="form-select form-select-lg" name="country">
+                <option value="">All</option>
+                {% for item in options.countries %}
+                <option value="{{ item }}" {% if filters.country == item %}selected{% endif %}>{{ item }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Gender</label>
+            <select class="form-select form-select-lg" name="gender">
+                <option value="">All</option>
+                {% for item in options.genders %}
+                <option value="{{ item }}" {% if filters.gender == item %}selected{% endif %}>{{ item }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2 d-grid">
+            <button class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-sliders me-2"></i>Apply
+            </button>
+        </div>
+        <div class="col-12">
+            <p class="text-soft small mb-0">
+                Available purchase date range: <strong>{{ date_bounds.min }}</strong> to <strong>{{ date_bounds.max }}</strong>.
+                If filters return no matching records, KPI values will appear as 0.
+            </p>
+        </div>
+    </form>
+</section>
+
+<section class="row g-4 mb-4">
+    <div class="col-md-6 col-xl-3">
+        <div class="kpi-card p-3 p-lg-4 h-100">
+            <p class="text-soft mb-2">Total Revenue</p>
+            <h3 id="kpiRevenue" class="fw-bold mb-0"></h3>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="kpi-card p-3 p-lg-4 h-100">
+            <p class="text-soft mb-2">Total Orders</p>
+            <h3 id="kpiOrders" class="fw-bold mb-0"></h3>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="kpi-card p-3 p-lg-4 h-100">
+            <p class="text-soft mb-2">Unique Users</p>
+            <h3 id="kpiUsers" class="fw-bold mb-0"></h3>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="kpi-card p-3 p-lg-4 h-100">
+            <p class="text-soft mb-2">Avg Rating</p>
+            <h3 id="kpiRating" class="fw-bold mb-0"></h3>
+        </div>
+    </div>
+</section>
+
+<section class="row g-4">
+    <div class="col-xl-8">
+        <div class="panel p-3 p-lg-4 h-100">
+            <h6 class="fw-semibold mb-3">Sales Over Time</h6>
+            <canvas id="lineChart" height="110"></canvas>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="panel p-3 p-lg-4 h-100">
+            <h6 class="fw-semibold mb-3">Category Distribution</h6>
+            <canvas id="pieChart" height="200"></canvas>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="panel p-3 p-lg-4 h-100">
+            <h6 class="fw-semibold mb-3">Top Products</h6>
+            <canvas id="barChart" height="160"></canvas>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="panel p-3 p-lg-4 h-100">
+            <h6 class="fw-semibold mb-3">Discount vs Sales</h6>
+            <canvas id="scatterChart" height="160"></canvas>
+        </div>
+    </div>
+</section>
+
+<script id="dashboard-data" type="application/json">{{ data_json|safe }}</script>
+{% endblock %}
